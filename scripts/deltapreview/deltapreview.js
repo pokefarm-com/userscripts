@@ -79,7 +79,8 @@ This is a known limitation, but the issue will lessen as more Delta combinations
              //grab our selected value
              const selectedType = document.querySelector("#delta-type-select").value;
              //grab existing background image url to manipulate
-             var url = targetEle.style.backgroundImage;
+             //also grab from static rather than r2, necessary as of 7/9/2025 server migration
+             var url = targetEle.style.backgroundImage.replace("r2","static");
              //regex time
              //example URLs:
              //https://static.pokefarm.com/img/pkmn/o/o/g/delta-water.png/t=1750511298.png
