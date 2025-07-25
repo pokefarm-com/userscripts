@@ -15,7 +15,7 @@ This repository hosts userscripts for use on the PokéFarm website. If you are a
 
 ## Contributing
 
-- To submit your userscript, please follow the steps described in [CONTRIBUTING.md](CONTRIBUTING.md).
+- To submit your userscript, please follow the steps described in [CONTRIBUTING.md](CONTRIBUTING.md) (**Updated 2025-07-25**).
 - All contributions are welcome, provided they adhere to the repository guidelines.
 
 ## License
