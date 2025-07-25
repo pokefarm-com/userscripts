@@ -13,7 +13,7 @@ Thank you for your interest in contributing userscripts to our project! We welco
 
 - Only submit scripts you have written.
 - By submitting a script, you agree it may be edited by maintainers as part of the review process.
-- Scripts must not contain malicious code or violate our [Code of Conduct](CODE_OF_CONDUCT.md).
+- Scripts must not contain malicious code or violate our [Code of Conduct](https://pokefarm.com/forum/thread/274596/Rules).
 - If your script depends on external resources, document them clearly in your PR.
 - Please test your script before submitting.
 - Use clear, descriptive commit messages.
