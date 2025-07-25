@@ -7,6 +7,12 @@ This is a known limitation, but the issue will lessen as more Delta combinations
 
 (function() {
     'use strict';
+    const allowedPaths = [
+        /^\/summary\/[^/]+$/,
+        /^\/party$/
+    ];
+
+    if (!allowedPaths.some(pattern => pattern.test(location.pathname))) return;
     const optionHtml = `
     <hr>
     <label id="changeDelta">Preview Delta Type</label>
