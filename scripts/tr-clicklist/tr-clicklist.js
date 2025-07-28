@@ -7,6 +7,7 @@
     const scriptName = 'tr-clicklist';
     let apiClient;
     let config;
+    let keydownListenerAdded = false;
 
     async function waitForDependencies(callback, tries = 0) {
         // Check if both dependencies are available
@@ -136,17 +137,21 @@
                 }
             });
 
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight' && !e.ctrlKey && !e.altKey && !e.metaKey) {
-                    // Check if the next button is enabled and visible
-                    const nextButton = document.querySelector('a.mu_navlink.next');
-                    if (nextButton && !nextButton.classList.contains('disabled') && 
-                        nextButton.offsetParent !== null) { // Check if visible
-                        e.preventDefault();
-                        nextButton.click();
+            // Only add keydown listener once globally
+            if (!keydownListenerAdded) {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight' && !e.ctrlKey && !e.altKey && !e.metaKey) {
+                        // Check if the next button is enabled and visible
+                        const nextButton = document.querySelector('a.mu_navlink.next');
+                        if (nextButton && !nextButton.classList.contains('disabled') && 
+                            nextButton.offsetParent !== null) { // Check if visible
+                            e.preventDefault();
+                            nextButton.click();
+                        }
                     }
-                }
-            });
+                });
+                keydownListenerAdded = true;
+            }
         }
 
         // Function to check and setup the next button
