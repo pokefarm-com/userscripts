@@ -12,11 +12,14 @@ Thank you for your interest in contributing userscripts to our project! We welco
 ## Pull Request Guidelines
 
 - Only submit scripts you have written.
+- If your PFQ username is not the same as your GitHub username, please include it in your script.
 - By submitting a script, you agree it may be edited by maintainers as part of the review process.
-- Scripts must not contain malicious code or violate our [Code of Conduct](CODE_OF_CONDUCT.md).
+- Ensure your script abides by our rules as per the [Wiki](https://github.com/pokefarm-com/userscripts/wiki).
+- Scripts must not contain malicious code or violate our [Code of Conduct](https://pokefarm.com/forum/thread/274596/Rules).
 - If your script depends on external resources, document them clearly in your PR.
 - Please test your script before submitting.
 - Use clear, descriptive commit messages.
+- If we review your PR and it remains inactive (no commits, comments, or acknowledgement) for 30 days, we will close it. Feel free to create a new PR at a later date if you're still working on it.
 
 ## Issue Reporting
 
@@ -36,4 +39,4 @@ This allows us to edit, review, and distribute your scripts as part of our users
 
 ## Questions or Help
 
-If you have questions, open an issue or contact the maintainers. We’re happy to help!
+If you have questions, open an issue or contact the maintainers. We're happy to help!
