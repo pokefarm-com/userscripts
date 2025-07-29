@@ -28,50 +28,70 @@
     async function addClicklistLink() {
         const typeElements = document.querySelectorAll('.type');
         
-        typeElements.forEach(element => {
-            // Check if link already exists to avoid duplicates
-            if (element.querySelector('.clicklist-link')) return;
-
-            config.set("page", 1);
-            config.persist();
+        // If no type elements found, return early
+        if (typeElements.length === 0) return;
+        
+        // Check if any element already has a clicklist link to avoid duplicates
+        const existingLink = document.querySelector('.clicklist-link');
+        if (existingLink) return;
+        
+        // Set page to 1 once and persist
+        config.set("page", 1);
+        config.persist();
+        
+        try {
+            // Make a single API call for all elements
+            const clicklist = await apiClient.typeraceClicklist(1);
             
-            apiClient.typeraceClicklist(1).then(clicklist => {
-                const dash = document.createTextNode(' - ');
-                element.appendChild(dash);
-                
-                const link = document.createElement('a');
-                link.href = `/users/:${clicklist.users.join(",:")}?src=${scriptName}`;
-                link.textContent = '[Clicklist]';
-                link.className = 'clicklist-link';
-                
-                // Add click handler for first run dialog
-                link.addEventListener('click', (e) => {
-                    if(config.get("firstRun") === true) {
-                        e.preventDefault();
-                        
-                        const buttons = [];
-                        buttons.push({ text: "Confirm", action: function() { window.location.href = link.href; }});
+            // Check if we have users in the clicklist
+            if (!clicklist.users || clicklist.users.length === 0) {
+                console.log('No users found in clicklist');
+                return;
+            }
+            
+            // Create the link URL once
+            const linkUrl = `/users/:${clicklist.users.join(",:")}?src=${scriptName}`;
 
-                        const contentHTML = `
-                            <p>This will open your team's clicklist.</p>
-                            <p>The clicklist is cached for 30 minutes, and does not check if you have already interacted with a user.</p>
-                            <p>Only users of your team with a non-zero score will be shown.</p>
-                            <p>Do not try to copy the link to this clicklist to share between other users, as it is dynamically generated every time this page is loaded (within the 30 minute cache).</p>
-                            <p><strong>This message will not appear again.</strong></p>
-                        `;
+            // Only run on first element, as the second is Stellar Info
+            const typeElement = typeElements[0];
+            
+            const dash = document.createTextNode(' - ');
+            typeElement.appendChild(dash);
+            
+            const link = document.createElement('a');
+            link.href = linkUrl;
+            link.textContent = '[Clicklist]';
+            link.className = 'clicklist-link';
+            
+            // Add click handler for first run dialog
+            link.addEventListener('click', (e) => {
+                if(config.get("firstRun") === true) {
+                    e.preventDefault();
+                    
+                    const buttons = [];
+                    buttons.push({ text: "Confirm", action: function() { window.location.href = link.href; }});
 
-                        const dialog = new Dialog("Moonsy's TR-Clicklist script", contentHTML, buttons);
+                    const contentHTML = `
+                        <p>This will open your team's clicklist.</p>
+                        <p>The clicklist is cached for 30 minutes, and does not check if you have already interacted with a user.</p>
+                        <p>Only users of your team with a non-zero score will be shown.</p>
+                        <p>Do not try to copy the link to this clicklist to share between other users, as it is dynamically generated every time this page is loaded (within the 30 minute cache).</p>
+                        <p><strong>This message will not appear again.</strong></p>
+                    `;
 
-                        dialog.opened(function(d) {
-                            config.set("firstRun", false);
-                            config.persist();
-                        });
-                    }
-                });
-                
-                element.appendChild(link);
+                    const dialog = new Dialog("Moonsy's TR-Clicklist script", contentHTML, buttons);
+
+                    dialog.opened(function(d) {
+                        config.set("firstRun", false);
+                        config.persist();
+                    });
+                }
             });
-        });
+            
+            typeElement.appendChild(link);
+        } catch (error) {
+            console.error('Error loading clicklist:', error);
+        }
     }
 
     // Function to handle clicklist navigation on user profile pages
