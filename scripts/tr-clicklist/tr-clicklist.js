@@ -114,6 +114,8 @@
             // Enable the button
             nextButton.classList.remove('disabled');
             nextButton.href = '#';
+            nextButton.textContent = 'Get more +';
+            nextButton.setAttribute('next-page', 'true');
 
             // Add click handler for next page navigation
             nextButton.addEventListener('click', async (e) => {
