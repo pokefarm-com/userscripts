@@ -114,11 +114,16 @@
             // Enable the button
             nextButton.classList.remove('disabled');
             nextButton.href = '#';
+            nextButton.textContent = 'Get more +';
+            nextButton.setAttribute('next-page', 'true');
 
             // Add click handler for next page navigation
             nextButton.addEventListener('click', async (e) => {
                 e.preventDefault();
                 
+                nextButton.classList.add('disabled');
+                nextButton.textContent = 'Loading...';
+
                 const currentPage = config.get("page");
                 const nextPage = currentPage + 1;
                 
@@ -134,9 +139,6 @@
                         
                         // Navigate to the next page
                         const nextUrl = `/users/:${nextClicklist.users.join(",:")}?src=${scriptName}`;
-
-                        nextButton.classList.add('disabled');
-                        nextButton.textContent = 'Loading...';
 
                         // Add 3 second delay before navigation to ensure interactions have been processed
                         setTimeout(() => {
