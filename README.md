@@ -1,3 +1,6 @@
+# ⚠️ ARCHIVED AS OF 20/01/2026 ⚠️
+Please go to [our new repository](https://git.pokefarm.com/PFQ/userscripts) to contribute.
+
 # PokéFarm Userscripts
 
 This repository hosts userscripts for use on the PokéFarm website. If you are an author looking to contribute a userscript, please review the guidelines below.
